@@ -1,0 +1,28 @@
+[OK]    PJ-01 Conexion a la base de datos
+      conexion abierta
+[OK]    PJ-02 registrar entrada (INSERTAR + parametro OUT)
+      id OUT=9, estado=Autorizado, stock 3 -> 23
+[OK]    PJ-03 registrar transferencia (queda Pendiente, stock igual)
+      id OUT=10, estado=Pendiente, stock origen=50
+[OK]    PJ-04 autorizar movimiento (ACTUALIZAR)
+      estado=Autorizado, stock origen 50 -> 45
+[OK]    PJ-05 rechazar movimiento con motivo (ACTUALIZAR)
+      estado=Rechazado, stock sin cambio=500
+      Kardex PRD-002 (3 filas):
+        #2 | 2026-11-22 14:20:41.0 | Entrada por compra | Autorizado | 60 | - -> BOD-001 | auxiliar
+        #7 | 2026-11-22 14:20:41.0 | Salida por consumo | Autorizado | 10 | BOD-001 -> - | auxiliar
+        #10 | 2026-11-22 14:20:46.0 | Transferencia entre bodegas | Autorizado | 5 | BOD-001 -> BOD-002 | auxiliar
+[OK]    PJ-06 consultar kardex (CONSULTAR, ResultSet)
+      3 filas e incluye el movimiento 10
+[OK]    PJ-07 inactivar producto (BORRAR logico)
+      estado producto 5 = Inactivo
+[OK]    PJ-08 error: autorizar con el mismo usuario que registro
+      SQLState=45000, codigo=1644, mensaje="(conn=21) Quien registra el movimiento no puede autorizarlo"
+[OK]    PJ-09 error: salida mayor al stock
+      SQLState=45000, codigo=1644, mensaje="(conn=21) Stock insuficiente en la bodega de origen"
+[OK]    PJ-10 error: rechazar sin motivo
+      SQLState=45000, codigo=1644, mensaje="(conn=21) Debe indicar el motivo del rechazo"
+[OK]    PJ-11 error: registrar sobre un producto inactivo
+      SQLState=45000, codigo=1644, mensaje="(conn=21) El producto no existe o esta inactivo"
+
+Resultado: 11 pruebas OK, 0 con FALLO

@@ -1,0 +1,8 @@
+# Binarios y archivos temporales
+*.zip
+*.jar
+out/
+target/
+*.class
+*.log
+salida_*.txt
